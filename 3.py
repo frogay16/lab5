@@ -1,13 +1,17 @@
-weekdays = ("Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье")
+import datetime
 
-k = int(input("Сколько выходных дней вы хотите на этой неделе? "))
+def magicdate(date):
+    try:
+        a = datetime.datetime.strptime(date, "%d.%m.%Y")
+        day = a.day
+        month = a.month
+        year = a.year % 100
+        if day * month == year:
+            return True
+        else:
+            return False
+    except ValueError:
+        return False
 
-if k == 1:
-    weekends = weekdays[-1]
-elif k > 1:
-    weekends = weekdays[-k:]
-
-workdays = weekdays[0:7-k]
-
-print('Ваши выходные дни: ', *weekends)
-print('Ваши рабочие дни: ', *workdays)
+date = input()
+print(magicdate(date))
